@@ -1,0 +1,81 @@
+\section{Measurement, collapse, and the cat}\label{sec:cat}
+
+The measurement problem is often phrased as a contradiction: unitary evolution produces superpositions, yet measurements yield definite outcomes.
+Schr{\"o}dinger's cat is the canonical thought experiment illustrating this tension.\cite{Schrodinger1935PresentSituation}
+In the SBT packaging language, the tension is resolved by separating:
+(i)~substrate dynamics, which can correlate system, apparatus, and environment coherently, from
+(ii)~packaging, which stabilizes a record algebra and thereby determines what counts as an object-level distinction at the layer.
+
+\subsection{A minimal system--apparatus--environment model}
+
+Let $S$ be a two-level system (the ``cat variable'' at the most schematic level), let $A$ be an apparatus pointer register, and let $\mathcal{E}$ be an environment (or any degrees of freedom that carry away phase information).
+Consider the following sequence:
+\begin{enumerate}
+  \item Prepare $S$ in a superposition $|\psi\rangle_S = \alpha|0\rangle + \beta|1\rangle$ and prepare $A$ in a ready state $|0\rangle_A$.
+  \item Apply a measurement interaction that correlates $S$ with the pointer---for example, a controlled-NOT gate $U_{SA}$ from $S$ to $A$:
+  \[
+  (\alpha|0\rangle_S+\beta|1\rangle_S)|0\rangle_A \mapsto \alpha|0\rangle_S|0\rangle_A + \beta|1\rangle_S|1\rangle_A.
+  \]
+  \item Allow the pointer to form a record by correlating with~$\mathcal{E}$ (or, equivalently for the layer's purposes, apply a dephasing channel in the pointer basis).
+\end{enumerate}
+
+At the substrate level, there is no requirement that the joint state become mixed: the composite $SA\mathcal{E}$ can remain pure under unitary evolution.
+What changes between ``superposition'' and ``definite record'' is not the causal law, but rather which distinctions are stabilized as objects by packaging at the layer.
+
+\subsection{Packaging in the pointer basis}
+
+Fix the pointer basis $\{|0\rangle_A,|1\rangle_A\}$ and define the packaging map as dephasing on~$A$ (possibly after discarding~$\mathcal{E}$):
+\[
+\mathrm{Pack}(\rho_{SA}) := \Delta_A(\rho_{SA}),
+\]
+where $\Delta_A$ removes off-diagonal coherence between distinct pointer values.
+This map is a closure: applying it twice does nothing further.
+
+The map $\mathrm{Pack}$ is a nonselective record-level update: it produces a mixture over pointer outcomes without specifying which outcome occurred. A definite observed outcome corresponds to conditioning on a particular pointer record---that is, a selective update that refines the state given the recorded value. This inferential refinement is treated separately from substrate dynamics.
+
+The operational content of ``collapse'' is then the following: once the record algebra is enforced, the layer must represent the joint state as a classical mixture over pointer records, with corresponding conditional system states.
+This representation is a bookkeeping update about objecthood at the layer, not a new causal discontinuity.
+
+\subsection{Reproducible diagnostics: global purity, packaged mixture, idempotence}
+
+Figure~\ref{fig:cat-packaging} shows the state before and after packaging in our explicit qubit model (repository experiment \texttt{EXP-CAT1}; see Appendix~\ref{app:repro}).
+The numerical diagnostics align with the SBT interpretation:
+\begin{itemize}
+  \item The global post-interaction state (including the environment when modeled explicitly) can be essentially pure.
+  \item The reduced $SA$ state after record formation or discard is mixed.
+  \item The packaged state is (to numerical precision) a classical mixture in the pointer basis.
+  \item Packaging is idempotent.
+\end{itemize}
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.95\linewidth]{cat_packaging.png}
+  \caption{System--apparatus measurement model: global coherence can persist in the substrate description while the packaged, record-level description is a classical mixture in the pointer basis.}
+  \label{fig:cat-packaging}
+\end{figure}
+
+\begin{table}[t]
+  \centering
+  \begin{tabular}{l r}
+    \toprule
+    Diagnostic (from \texttt{EXP-CAT1}) & Value \\
+    \midrule
+    Global purity after record interaction $\mathrm{Tr}(\rho_{SA\mathcal{E}}^2)$ & \CatPurityGlobal \\
+    Local purity after record formation $\mathrm{Tr}(\rho_{SA}^2)$ & \CatPurityLocal \\
+    Distance(packaged state, pointer-basis mixture) & \CatDistMix \\
+    Idempotence error $\|\mathrm{Pack}(\mathrm{Pack}(\rho))-\mathrm{Pack}(\rho)\|$ & \CatIdemErr \\
+    \bottomrule
+  \end{tabular}
+  \caption{Measured diagnostics supporting ``collapse as packaging'': the packaged description is mixture-like and idempotent, while the substrate can remain coherent globally.}
+  \label{tab:cat-metrics}
+\end{table}
+
+\subsection{Why the paradox is a category mistake}
+
+The traditional paradox arises when one treats the substrate state (a tool for composing amplitudes and tracking correlations) as an object-level description of macroscopic alternatives.
+In the packaging language, macroscopic alternatives become object-level distinctions only when those alternatives are stabilized by a record algebra.
+Before that stabilization, insisting that the layer already contains a definite object-level fact about mutually exclusive outcomes is precisely the kind of surplus distinction that Spekkens' Leibnizian stance warns against.
+
+SBT does not deny that unitary dynamics can correlate microscopic degrees of freedom in ways that, under a later packaging, yield definite records.
+SBT denies that objecthood is free or layer-independent.
+The cat is not ``both outcomes at once'' as an object of the record layer; rather, the record layer's objects are determined by packaging, and collapse is the idempotent closure that enforces that objecthood.

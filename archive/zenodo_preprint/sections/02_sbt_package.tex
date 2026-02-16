@@ -1,0 +1,171 @@
+\section{Six Birds Theory as a packaging language}\label{sec:sbt}
+
+This section fixes notation for the rest of the paper. The guiding idea is straightforward:
+a descriptive \emph{layer} is specified not only by a state space, but also by what can be \emph{stably expressed and recorded} at an interface.
+SBT encodes this idea by separating causal substrate evolution from packaging operations that stabilize distinctions into record-level objects.\cite{Tsiokos2026SixBirds}
+
+\subsection{Six Birds recap: how the primitives specialize here}
+
+The six primitives are unchanged; what changes is how they specialize in the quantum packaging setting of this paper. We summarize their roles to anchor the rest of the notation.
+
+\paragraph{P1: Operator rewrite (closure).}
+Closed macro dynamics exists only when packaging yields a stable description of evolution; when it does not, one must rewrite/repair the effective operator. Here P1 appears as the demand that packaged evolution is well-defined and stable under reapplication.
+
+\paragraph{P2: Constraints (feasibility).}
+Constraints specify what record distinctions and interventions are admissible. In quantum settings this corresponds to feasible record algebras and instrument constraints that delimit what can be stably recorded.
+
+\paragraph{P3: Protocols / route mismatch.}
+P3 diagnoses noncommuting reduction routes: the order of packaging and evolution (or two packaging contexts) can matter. This is quantified as route mismatch.
+
+\paragraph{P4: Staging (timescales).}
+Staging introduces a timescale parameter $\tau$ for how much substrate evolution occurs between packaging steps, yielding $E_{\tau,f}=U_f Q_f T_\tau$.
+
+\paragraph{P5: Packaging (quotienting indistinguishability).}
+Packaging constructs the layer’s effective objects by collapsing distinctions not stabilized by the record algebra; fixed points of packaging are the record-level objects.
+
+\paragraph{P6: Accounting (audits/monotones).}
+Audits quantify what survives coarse access; in this paper total variation, trace distance, and related monotones enforce ``no false positives'' under packaging.
+
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.18\linewidth}p{0.77\linewidth}@{}}
+\toprule
+\textbf{Primitive (Bird)} & \textbf{Role in quantum packaging (this paper)} \\
+\midrule
+P1 Operator rewrite & Closed packaged dynamics and stable closure under reapplication. \\
+P2 Constraints & Feasible record algebras and admissible interventions. \\
+P3 Protocols / route mismatch & Noncommuting packaging routes or packaging vs evolution. \\
+P4 Staging & Timescale $\tau$ controlling how much evolution occurs between packaging steps. \\
+P5 Packaging & Quotienting indistinguishability; record-level objects as fixed points. \\
+P6 Accounting & Audit monotones (e.g., trace distance) that contract under coarse access. \\
+\bottomrule
+\end{tabular}
+\caption{How the six SBT primitives specialize to the quantum packaging language used here.}
+\label{tab:six-birds-quantum}
+\end{table}
+
+\subsection{Theory packages}
+
+A (minimal) SBT-style theory package will be written as
+\[
+(Z,\ T,\ f,\ Q_f,\ U_f,\ E_f,\ \mathcal{A}),
+\]
+with the following roles.
+
+\paragraph{Substrate.}
+$Z$ is the space of microdescriptions (``substrate states''). In classical examples, $Z$ might be a finite set of microstates; in quantum instantiations, $Z$ may be a space of density operators on a composite Hilbert space that includes system, apparatus, and environment.
+
+\paragraph{Causal evolution.}
+$T$ denotes substrate dynamics. Concretely, $T$ is a time-indexed family $(T_\tau)_{\tau\ge 0}$ acting on substrate states (or distributions over~$Z$), representing causal propagation.
+
+\paragraph{Lens (record interface).}
+$f$ denotes a layer interface (a family of admissible lenses/records/queries, as defined in Section~\ref{sec:spekkens}). Intuitively, $f$ determines which distinctions can become record-level variables.
+
+\paragraph{Coarse access and completion.}
+$Q_f$ is a coarse-graining map (``what the layer can read''), and $U_f$ is a completion/standardization map (``how the layer represents what it reads'').
+The exact types of $Q_f$ and $U_f$ depend on the setting:
+in a classical finite setting, $Q_f$ may push forward a distribution on~$Z$ to a distribution over record values;
+in quantum settings, $Q_f$ may discard degrees of freedom (via partial trace) or restrict observables to a subalgebra.
+
+\paragraph{Packaging map.}
+The packaging endomap induced by the lens is
+\[
+E_f := U_f \circ Q_f.
+\]
+When causal evolution at timescale~$\tau$ is relevant, we use the composed operator
+\[
+E_{\tau,f} := U_f \circ Q_f \circ T_\tau .
+\]
+Packaging should be read as a \emph{layer update} (stabilizing expressible distinctions), not as a new causal law.
+
+\paragraph{Audit/monotones.}
+$\mathcal{A}$ denotes an ``audit'' family: distinguishability measures that must be non-increasing under admissible coarse access. Concretely, this requirement is a data-processing constraint:
+coarse-graining should not create spurious distinguishability. In classical settings, we use total variation distance; in quantum settings, standard choices include trace distance and relative entropy. For any CPTP map~$\Phi$, trace distance contracts:
+\[
+\tfrac12\|\Phi(\rho)-\Phi(\sigma)\|_1 \le \tfrac12\|\rho-\sigma\|_1,
+\]
+and relative entropy is monotone under CPTP maps.\cite{NielsenChuang2010QCQI,Lindblad1975EntropyIneq} We cite these standard facts rather than re-prove them here.
+
+\subsection{Packaging as closure}
+
+A central structural postulate is that packaging behaves like a closure operator: applying packaging twice does not add new record-level content.
+In the simplest (state-space) form, this postulate is the idempotence condition
+\[
+E_f \circ E_f \;=\; E_f.
+\]
+More generally (and closer to the OI--EI viewpoint), closures can be defined on sets via saturation under an empirical equivalence relation; both the state-space and set-saturation pictures agree on the fixed-point characterization described below.
+
+\paragraph{Set-level closure from an equivalence.}
+Given an equivalence relation~$\sim$ on~$Z$, define the saturation (``closure'') of a subset $A\subseteq Z$ by
+\[
+\mathrm{sat}_\sim(A) := \{\, z\in Z : \exists a\in A,\ z\sim a \,\}.
+\]
+This saturation operator satisfies the closure axioms:
+\begin{itemize}
+  \item (Extensive) $A \subseteq \mathrm{sat}_\sim(A)$.
+  \item (Monotone) $A\subseteq B \Rightarrow \mathrm{sat}_\sim(A)\subseteq \mathrm{sat}_\sim(B)$.
+  \item (Idempotent) $\mathrm{sat}_\sim(\mathrm{sat}_\sim(A)) = \mathrm{sat}_\sim(A)$.
+\end{itemize}
+\paragraph{Two closure viewpoints.}
+Set-level closure is a genuine closure operator on subsets, and set-level closure is what we mechanize in Lean. State-level packaging maps are idempotent endomaps (projectors/retractions) on a state space. In this paper, we rely only on idempotence and fixed points as the notion of objecthood, without claiming a general equivalence between the two viewpoints.
+
+In the accompanying repository, these properties are mechanized in Lean (see \texttt{Packaging\-From\-Equivalence.lean}, specifically \texttt{sat\_idem}; see Appendix~\ref{app:lean} for a consolidated table of mechanized statements).
+
+\subsection{Objects as fixed points}
+
+SBT treats \emph{objecthood} as layer-relative: an ``object'' is whatever remains invariant under packaging at that layer.
+This definition is expressed as a fixed-point condition.
+
+\paragraph{State-level view.}
+If $E_f$ acts on a state space (distributions, density matrices, etc.), then the record-level objects are the fixed points
+\[
+\mathrm{Fix}(E_f) := \{\rho : E_f(\rho)=\rho\}.
+\]
+Intuitively, these fixed points are precisely the states that already look ``classical'' in the chosen record language, so packaging adds nothing further to them.
+
+\paragraph{Set-level view.}
+For the saturation closure above, the fixed points are exactly unions of equivalence classes:
+\[
+\mathrm{sat}_\sim(A)=A \quad\Longleftrightarrow\quad
+\text{$A$ is a union of $\sim$-classes.}
+\]
+This characterization is mechanized in Lean as \texttt{sat\_eq\_iff\_unionOfClasses} (and an explicit union form in \texttt{sat\_eq\_iUnion\_classOf}).
+
+\paragraph{Alignment of quotient and fixed points.}
+If $E:S\to S$ is idempotent, define $x\sim_E y \iff E(x)=E(y)$. Then the quotient $S/{\sim_E}$ is canonically represented by $\mathrm{Fix}(E)=\{x:E(x)=x\}$ (equivalently, by $\mathrm{Im}(E)$). Thus the quotient picture and the fixed-point picture are compatible: packaging supplies canonical representatives of empirical equivalence classes.
+
+\subsection{Route mismatch as noncommuting packaging}
+
+Different experimental contexts typically induce different packaging maps.
+A key diagnostic in SBT is that these different packaging routes need not be mutually compatible.
+
+\paragraph{Noncommutation.}
+Given two packaging maps $E$ and $F$ (endomaps on the same space), incompatibility can be stated as noncommutation:
+\[
+E\circ F \neq F\circ E,
+\]
+or witnessed pointwise by the existence of some input~$\rho$ such that $E(F(\rho))\neq F(E(\rho))$.
+
+\paragraph{Route mismatch.}
+Quantitatively, one can measure a route mismatch by a metric $d$:
+\[
+\mathrm{RM}_d(E,F;\rho) := d\big(E(F(\rho)),\,F(E(\rho))\big),
+\]
+and consider a worst-case mismatch $\sup_\rho \mathrm{RM}_d(E,F;\rho)$ over a class of states.
+In the quantum experiments below we take $d$ to be trace distance.
+
+\paragraph{Certified finite witness.}
+The existence of noncommuting idempotents is not a peculiarity of quantum theory; it is a structural possibility that arises whenever one admits multiple closures.
+In the accompanying repository, we include a minimal finite example: two idempotent endomaps on \texttt{Fin~4} that do not commute (see \texttt{lean/Sbtq/Sbtq/RouteMismatch.lean}, specifically \texttt{mismatch\_witness} and \texttt{not\_commute\_E\_F}).
+
+\subsection{What this language buys us for quantum theory}
+
+With this language in place, the later sections are instantiations:
+\begin{itemize}
+  \item Causal evolution corresponds to unitary or open dynamics on a substrate.
+  \item Packaging corresponds to enforcing a record algebra (often dephasing in a pointer basis).
+  \item ``Collapse'' becomes idempotent bookkeeping (a closure).
+  \item Contextual incompatibility becomes route mismatch between closures.
+  \item Audits restrict how much apparent structure can be generated by coarse access.
+\end{itemize}

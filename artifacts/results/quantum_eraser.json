@@ -1,0 +1,18 @@
+{
+  "fringe_anticorrelation": -1.0,
+  "model": "marked_path_env_qubit_pm_measure",
+  "p_minus": 0.49999999999999967,
+  "p_plus": 0.49999999999999967,
+  "params": {
+    "k": 6.0,
+    "mask_threshold": 0.2,
+    "n": 4000,
+    "sigma": 5.0,
+    "xmax": 10.0,
+    "xmin": -10.0
+  },
+  "visibility_diff": 5.988631955888835e-07,
+  "visibility_minus": 0.9999989365235404,
+  "visibility_plus": 0.999999535386736,
+  "visibility_unconditional": 6.661338147750941e-16
+}

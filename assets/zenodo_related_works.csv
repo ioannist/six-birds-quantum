@@ -1,0 +1,18 @@
+relation,identifier,scheme,resource_type,bibkey,title
+Cites,10.1103/PhysRevA.75.032110,DOI,publication-article,Spekkens2007Toy,Evidence for the Epistemic View of Quantum States: A Toy Theory
+Cites,10.1103/PhysicsPhysiqueFizika.1.195,DOI,publication-article,Bell1964,On the Einstein Podolsky Rosen Paradox
+Cites,10.1038/nphys2309,DOI,publication-article,Pusey2012PBR,On the Reality of the Quantum State
+Cites,10.1512/iumj.1968.17.17004,DOI,publication-article,KochenSpecker1967,The Problem of Hidden Variables in Quantum Mechanics
+Cites,10.1103/PhysRevLett.65.3373,DOI,publication-article,Mermin1990,Simple Unified Form for the Major No-Hidden-Variables Theorems
+Cites,10.1103/PhysRevA.25.2208,DOI,publication-article,ScullyDruhl1982,"Quantum Eraser: A Proposed Photon Correlation Experiment Concerning Observation and ""Delayed Choice"" in Quantum Mechanics"
+Cites,10.1103/PhysRevLett.84.1,DOI,publication-article,Kim2000DelayedChoice,A Delayed Choice Quantum Eraser
+Cites,10.1103/RevModPhys.75.715,DOI,publication-article,Zurek2003Decoherence,"Decoherence, Einselection, and the Quantum Origins of the Classical"
+Cites,10.5281/zenodo.18365949,DOI,other,Tsiokos2026SixBirds,Six Birds: Foundations of Emergence Calculus
+Cites,10.5281/zenodo.18412131,DOI,other,Tsiokos2026Stone,To Become a Stone with Six Birds: A Physics is A Theory
+Cites,978-0-471-24195-9,ISBN,publication-book,CoverThomas2006,Elements of Information Theory
+Cites,978-0-52163-396-3,ISBN,publication-book,Norris1997,Markov Chains
+Cites,10.1103/PhysRevLett.77.2154,DOI,publication-article,Englert1996Visibility,Fringe Visibility and Which-Way Information: An Inequality
+Cites,10.1103/PhysRev.47.777,DOI,publication-article,Einstein1935EPR,Can Quantum-Mechanical Description of Physical Reality Be Considered Complete?
+Cites,10.1007/BF01491891,DOI,publication-article,Schrodinger1935PresentSituation,Die gegenwaertige Situation in der Quantenmechanik
+Cites,10.1007/BF01609396,DOI,publication-article,Lindblad1975EntropyIneq,Completely Positive Maps and Entropy Inequalities
+Cites,10.1017/CBO9780511976667,DOI,publication-book,NielsenChuang2010QCQI,Quantum Computation and Quantum Information: 10th Anniversary Edition

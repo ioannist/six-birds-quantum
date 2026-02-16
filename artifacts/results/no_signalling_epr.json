@@ -1,0 +1,11 @@
+{
+  "cond_outcome_dist_X": 1.0,
+  "cond_outcome_dist_Z": 1.0,
+  "model": "bell_no_signalling_vs_conditioning",
+  "no_signalling_dist_X": 2.220446049250313e-16,
+  "no_signalling_dist_Z": 0.0,
+  "p0_Z": 0.4999999999999999,
+  "p1_Z": 0.4999999999999999,
+  "p_minus_X": 0.49999999999999967,
+  "p_plus_X": 0.49999999999999967
+}

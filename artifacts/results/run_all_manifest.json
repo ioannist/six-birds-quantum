@@ -1,0 +1,76 @@
+{
+  "files": [
+    {
+      "path": "figures/cat_packaging.png",
+      "sha256": "05d841fb591a0061f21b22f4c6707786410f0cc353dbcad7083c78a70c47e12c"
+    },
+    {
+      "path": "figures/dephase_contexts_mismatch.png",
+      "sha256": "5983db43d73792e467fc8ea8d4bec55855c4d429ccf2dd8ea79de17f5ebc448e"
+    },
+    {
+      "path": "figures/double_slit_patterns.png",
+      "sha256": "744200fd4aeee318bfd79d1f821935509cb559623fdfdbcc2217c36ce22b7ba4"
+    },
+    {
+      "path": "figures/double_slit_visibility.png",
+      "sha256": "8524c39498429159e3bd4724e5f6f0c2124cdcbaaa685c296e762ab2376c60fc"
+    },
+    {
+      "path": "figures/markov_idempotence_vs_tau.png",
+      "sha256": "8ee6688e1f03671bf9e8905b1a50bbf64efc7f7a56aa6b4dcf3a95f84a99f740"
+    },
+    {
+      "path": "figures/no_signalling_epr.png",
+      "sha256": "e62c52f961a67e7c0ac773c8ae87c84cdc1784e3c4c0e315461fde0ddb7bcab0"
+    },
+    {
+      "path": "figures/quantum_eraser_conditional.png",
+      "sha256": "10eb5ae4d7164af8bba178a15c115c9af0d4ef0f9ae437d2fa82258b93690cb3"
+    },
+    {
+      "path": "figures/quantum_eraser_unconditional.png",
+      "sha256": "d37c1a21a1f571f34d8a2d49831a4160845653b27f80a589c14243bc5c2c679b"
+    },
+    {
+      "path": "figures/route_mismatch_heatmap.png",
+      "sha256": "5984e57c08b45e4ba996dcf4fe0caf799f5fb25b2c7e58fe0c4821fdbbca4e59"
+    },
+    {
+      "path": "figures/route_mismatch_vs_time.png",
+      "sha256": "2b55f5315cce1966a3dba75d6cd24e90318d156c73aed963ed42cc83705c4489"
+    },
+    {
+      "path": "results/cat_packaging.json",
+      "sha256": "7441aa951334292e3043973f35e5e1be6a08665a5ce97ed314edd6ad258027ee"
+    },
+    {
+      "path": "results/dephase_contexts.json",
+      "sha256": "18214e3dcf1b372c6edf0e39255c7104c253bc9762051f2b436a56d242c2cdf4"
+    },
+    {
+      "path": "results/double_slit.json",
+      "sha256": "530aac878cd2b3639aa77ef4cbeb5a7c4b5496edb100051021ff72eb7fc55a30"
+    },
+    {
+      "path": "results/markov_packaging.json",
+      "sha256": "bfa7bf48271d038201be6e3469342cdd180c33c3eaa59275419949c89a6e4439"
+    },
+    {
+      "path": "results/no_signalling_epr.json",
+      "sha256": "633b88c70336785fdedfe7b7e7df592f773945e0bb435b57ee4357844ed92404"
+    },
+    {
+      "path": "results/quantum_eraser.json",
+      "sha256": "e2df8fe84eea558989ae84c147be51c277e9b3610b60f4ce88a1f8d04abff9f8"
+    },
+    {
+      "path": "results/route_mismatch.json",
+      "sha256": "49122145191bd619e9f4234f9e976d4638dad6d50e085548503b1d2ade028672"
+    },
+    {
+      "path": "results/run_all.json",
+      "sha256": "6f2708d2b83c160eb883a22fc41c676cbbcfa3e0bf9fb292c50261c525df6735"
+    }
+  ]
+}

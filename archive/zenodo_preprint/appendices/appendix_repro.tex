@@ -1,0 +1,33 @@
+\section{Reproducible experiments}\label{app:repro}
+
+To reproduce all experiments, run the following commands:
+
+\noindent\texttt{python -m sbtq.run\_all --seed 0 --out artifacts} \\
+\texttt{python -m sbtq.run\_all --seed 0 --out artifacts --check-existing} \\
+\texttt{python -m sbtq.robustness\_sweep --out artifacts --seeds 0 1 2 3 4 5 6 7 8 9} \\
+\texttt{python -m pytest -q} \\
+\texttt{cd lean/Sbtq \&\& lake build}
+
+\medskip
+\noindent Determinism artifacts are stored in \texttt{artifacts/results/run\_all.json} and \texttt{run\_all\_manifest.json}.
+
+\begin{table}[t]
+  \centering
+  \scriptsize
+  \setlength{\tabcolsep}{4pt}
+  \begin{tabular}{@{}lll@{}}
+    \toprule
+    ID & Module & Output figures \\
+    \midrule
+    EXP-DS1 & double\_slit & double\_slit\_patterns, double\_slit\_visibility \\
+    EXP-QE1 & quantum\_eraser & quantum\_eraser\_unconditional, quantum\_eraser\_conditional \\
+    EXP-RM1 & route\_mismatch & route\_mismatch\_vs\_time, route\_mismatch\_heatmap \\
+    EXP-CAT1 & cat\_packaging & cat\_packaging \\
+    EXP-MK1 & markov\_packaging & markov\_idempotence\_vs\_tau \\
+    EXP-CTX1 & dephase\_contexts & dephase\_contexts\_mismatch \\
+    EXP-NS1 & no\_signalling\_epr & no\_signalling\_epr \\
+    \bottomrule
+  \end{tabular}
+  \caption{Reproducible experiment inventory. Run: \texttt{python -m sbtq.experiments.<module> --seed 0 --out artifacts}. Figures go to \texttt{artifacts/figures/}; results to \texttt{artifacts/results/}.}
+  \label{tab:experiment-inventory}
+\end{table}

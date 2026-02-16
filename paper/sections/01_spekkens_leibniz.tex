@@ -1,0 +1,59 @@
+\section{Spekkens' diagnosis and a Leibnizian layer principle}\label{sec:spekkens}
+
+\subsection{The category mistake: inference versus causation}
+
+A recurring source of confusion in quantum foundations is a tacit conflation of two kinds of statements:
+(i)~\emph{causal} statements about what the world does, and
+(ii)~\emph{inferential} statements about what an agent (or an interface) can stably record, compute, or predict.
+Quantum theory, as normally presented, uses a single mathematical object---the quantum state---to serve both roles simultaneously. This conflation is not merely a matter of interpretation; it shapes what counts as a paradox.
+
+Spekkens' central diagnosis is that physicists are making a category mistake: they treat an inferential/completion object (the quantum state) as if it were an element of physical ontology.\cite{Spekkens2007Toy} Once this conflation occurs, standard arguments pressure theorists toward surplus structure---distinctions that are posited to exist in reality but are invisible to any admissible record at the descriptive layer under consideration. The consequences are well known: discontinuous collapse, measurement-induced ``disturbance'' reified as a physical discontinuity, and nonlocal influences that cannot be used to signal and hence cannot be isolated as operationally distinguishable causal mechanisms at the relevant layer.
+
+SBT's starting point is to refuse this conflation. SBT separates substrate dynamics (causal evolution) from packaging (the process that turns some distinctions into stable record-level objects). To motivate this separation as a methodological principle rather than a mere preference, we adopt a Leibnizian stance.
+
+\subsection{OI--EI as a methodological constraint}
+
+\begin{principle}[Ontological identity of empirical indiscernibles (OI--EI)]
+Fix a descriptive layer (a choice of admissible lenses/records/experiments). If two putative scenarios are empirically indiscernible under \emph{all} admissible experiments at that layer, then those two scenarios must be identified as the same object of description at that layer.
+\end{principle}
+
+This identification is layer-relative (analogous to quotienting gauge redundancy): OI--EI does not deny microstructure; it denies only that empirically silent distinctions are objects of the chosen layer.
+The principle is not a metaphysical postulate. Rather, OI--EI is a constraint on theory language: one should not build into a layer's ontology distinctions that the layer itself cannot, even in principle, stably witness. Spekkens' critique of many quantum ``solutions'' is that they preserve the standard formalism by paying with precisely such surplus structure.
+
+\subsection{Formalization: empirical equivalence from a family of lenses}
+
+Let $Z$ be a space of microdescriptions (``substrate states''). A layer is specified by a family of \emph{lenses}
+\[
+ f_i : Z \to X_i,\qquad i\in I,
+\]
+where $f_i(z)$ represents what is accessible to the layer via experiment or interface~$i$.
+(For simplicity, one may take a common codomain~$X$ and write $f_i : Z\to X$; the construction below does not depend on this choice.)
+
+Define an empirical equivalence relation:
+\[
+ z \sim z' \quad\Longleftrightarrow\quad \forall i\in I,\ f_i(z)=f_i(z').
+\]
+By construction, $z\sim z'$ means that the layer cannot distinguish $z$ from $z'$ using any admissible lens in the family. OI--EI then dictates that such states must be identified as the same object at that layer.
+
+\subsection{The Leibniz quotient and its universal property}
+
+The correct object space for the layer is therefore the quotient $Z/{\sim}$: an ``object'' at the layer is not a microstate, but an equivalence class of empirically indistinguishable microstates.
+Moreover, each admissible lens must factor through this quotient, because by definition lens values are constant on equivalence classes.
+
+\begin{theorem}[Leibniz quotient factorization]\label{thm:leibniz-quotient}
+Let $Z$ be a type of microdescriptions and let $\{f_i : Z\to X\}_{i\in I}$ be a family of lenses. Define $z\sim z'$ iff $f_i(z)=f_i(z')$ for all $i$.
+Then:
+\begin{enumerate}
+  \item The relation $\sim$ is an equivalence relation, hence determines a quotient map $q: Z\to Z/{\sim}$.
+  \item Each lens $f_i$ factors through the quotient: there exists a unique $\bar f_i : Z/{\sim}\to X$ such that $\bar f_i\circ q = f_i$.
+  \item (Universal property) If $g:Z\to Y$ is constant on $\sim$-classes, then there exists a unique $\bar g: Z/{\sim}\to Y$ with $\bar g\circ q = g$.
+\end{enumerate}
+\end{theorem}
+
+The universal property itself is standard quotient mathematics; the substantive move is the methodological constraint that the lens family defines the layer's ontology. Theorem~\ref{thm:leibniz-quotient} is the precise mathematical statement of ``empirical indiscernibility implies ontological identity at the layer'': the layer's objects are exactly the equivalence classes, and every layer-expressible quantity factors uniquely through these classes. In the accompanying repository, this factorization is mechanized in Lean~4 (see \texttt{lean/Sbtq/Sbtq/LeibnizQuotient.lean}, specifically \texttt{quotient\_lift\_exists\_unique} and \texttt{liftLens\_comp\_q}; see Appendix~\ref{app:lean} for a consolidated table of mechanized statements).
+
+\subsection{A finite example (mirroring the mechanization)}
+
+Let $Z=\{\texttt{Bool}\}\times\{\texttt{Bool}\}$, and consider a layer with a single lens $f(z)=z_1$ that reads only the first bit. Then $(\texttt{true},\texttt{false})\sim(\texttt{true},\texttt{true})$ because the lens cannot access the second component. The Leibniz quotient has exactly two objects: the class whose first bit is \texttt{false} and the class whose first bit is \texttt{true}. Any layer-expressible predicate must therefore depend only on~$z_1$; treating the second bit as an object-level distinction would violate OI--EI for this layer.
+
+This example provides the structural template that we will reuse for quantum theory: the relevant ``objects'' are determined by what can become a stable record at the layer, not by the full microdescription. The rest of the paper instantiates this quotient-and-factorization logic using packaging maps (closures) that stabilize record-level distinctions.

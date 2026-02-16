@@ -1,0 +1,73 @@
+\documentclass[11pt]{article}
+\pdfoutput=1
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\newtheorem{theorem}{Theorem}
+\newtheorem{principle}{Principle}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{fancyhdr}
+\PassOptionsToPackage{hidelinks}{hyperref}
+\IfFileExists{orcidlink.sty}{\usepackage{orcidlink}}{\newcommand{\orcidlink}[1]{}}
+\usepackage{hyperref}
+
+\graphicspath{{figures/}}
+
+% Affiliation helper (HAL-compatible author block).
+\makeatletter
+\newcommand{\affiliation}[1]{\gdef\@affiliation{#1}}
+\newcommand{\printaffiliation}{\begin{center}\small \@affiliation\end{center}}
+\makeatother
+
+\IfFileExists{generated/metrics.tex}{\input{generated/metrics.tex}}{}
+
+\title{A Six-Birds' Eye View of Quantum Theory:\\Operational Closure Semantics for Measurement, Contextuality, and Record Stability}
+\author{Ioannis Tsiokos\,\orcidlink{0009-0009-7659-5964}}
+\affiliation{}
+\date{11 February 2026\\[4pt]{\small Version 2 (revised 16 February 2026) \quad$\cdot$\quad Zenodo v1: \href{https://doi.org/10.5281/zenodo.18608833}{10.5281/zenodo.18608833}}}
+
+\fancypagestyle{firstpage}{%
+  \fancyhf{}
+  \fancyfoot[C]{\scriptsize Automorph Inc., Wilmington, DE, USA \quad \texttt{ioannis@automorph.io} \quad \textcopyright\ 2026 \quad CC-BY 4.0 \quad Preprint --- not peer reviewed.\\[2pt] Zenodo: \href{https://doi.org/10.5281/zenodo.18608833}{10.5281/zenodo.18608833}}
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0pt}
+}
+
+\begin{document}
+\maketitle
+\thispagestyle{firstpage}
+\printaffiliation
+\begin{abstract}
+We present a reproducible computational framework---with Lean~4 mechanized proofs and deterministic Python simulations---that recasts quantum measurement, contextuality, and the measurement problem using operational semantics drawn from Six Birds Theory (SBT), a closure-based emergence calculus. Standard presentations of quantum mechanics mix causal evolution with inferential state update, so ``collapse,'' contextuality, and Schr\"odinger's cat are often treated as physical discontinuities or as evidence for surplus ontology. We separate these roles explicitly: causal substrate dynamics are distinguished from \emph{packaging} (an idempotent closure operation that stabilizes record-level objects via a chosen record algebra). Operationally, we define an SBT theory package $(Z,T,f,Q_f,U_f,E_f,\mathcal{A})$, mechanize its quotient/closure/audit lemmas in Lean~4, and implement a reproducible suite of simulations spanning quantum and classical examples. Our results are comparative and controlled: (i)~dephasing in a fixed record basis is an idempotent packaging map whose fixed points are exactly the diagonal (record-classical) states; (ii)~route mismatch between evolution and packaging is approximately zero when the Hamiltonian is diagonal in the record basis, but nonzero for generic Hamiltonians or incompatible record bases; (iii)~in a double-slit model, decreasing environment-record overlap continuously suppresses fringe visibility, while conditioning in a quantum eraser restores complementary fringes; (iv)~in a system--apparatus--environment measurement model, the global state can remain near-pure while the packaged record state is a classical mixture, and packaging remains idempotent. This role separation localizes which distinctions are layer-relative and yields information-theoretic diagnostics for context dependence and record stability. We do not claim to derive the Born rule or resolve Bell's theorem; instead, we provide a structurally explicit reformulation supported by mechanization and reproducible demonstrations.
+\end{abstract}
+
+\vspace{1ex}
+\noindent\textbf{Keywords:} quantum foundations; contextuality; operational semantics; measurement models; markov kernels; closure operators; data-processing inequality
+
+
+\input{sections/00_placeholder.tex}
+\input{sections/01_spekkens_leibniz.tex}
+\input{sections/02_sbt_package.tex}
+\input{sections/03_qm_as_package.tex}
+\input{sections/04_double_slit.tex}
+\input{sections/05_cat.tex}
+\input{sections/06_markov.tex}
+\input{sections/07_no_go.tex}
+\input{sections/08_discussion.tex}
+\input{sections/09_conclusion.tex}
+
+\appendix
+\input{appendices/appendix_lean.tex}
+\input{appendices/appendix_repro.tex}
+\input{appendices/appendix_robustness.tex}
+
+\bibliographystyle{unsrt}
+\bibliography{references}
+
+\end{document}

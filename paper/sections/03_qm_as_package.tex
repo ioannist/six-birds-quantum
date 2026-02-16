@@ -1,0 +1,137 @@
+\section{Quantum mechanics as a packaging theory}\label{sec:qm-package}
+
+This section instantiates the SBT package of Section~\ref{sec:sbt} within finite-dimensional quantum mechanics.
+The aim is not to reinterpret quantum dynamics, but to separate two kinds of maps that are often conflated:
+(1)~causal substrate evolution and (2)~packaging into record-level objects.
+
+\subsection{Substrate and microdynamics}
+
+Let $\mathcal{H}$ be a finite-dimensional Hilbert space, and let substrate descriptions be density operators
+$\rho \in \mathsf{D}(\mathcal{H})$.\cite{NielsenChuang2010QCQI}
+Causal evolution is a family of completely positive trace-preserving (CPTP) maps~$T_\tau$.\cite{NielsenChuang2010QCQI}
+In the closed-system idealization,
+\[
+T_\tau(\rho)=U_\tau \rho U_\tau^\dagger
+\]
+for a unitary $U_\tau = e^{-iH\tau}$.
+More generally, the substrate may be enlarged to include an apparatus and environment,
+$\mathcal{H}=\mathcal{H}_S\otimes \mathcal{H}_A\otimes \mathcal{H}_E$,
+and $T_\tau$ may consist of unitary evolution on the composite followed by discarding inaccessible degrees of freedom.
+
+\subsection{Lenses as record algebras}
+
+A layer is specified by what counts as a stable record.
+In quantum mechanics, a layer is naturally modeled by a choice of \emph{record algebra} (or pointer basis) on an apparatus register.\cite{Zurek2003Decoherence}
+Operationally, this choice corresponds to a choice of instrument outcomes or a preferred commuting subalgebra of observables;
+the record algebra is the quantum analogue of a lens family $\{f_i\}$ from Section~\ref{sec:spekkens}.
+
+SBT distinguishes (i)~the existence of substrate correlations from (ii)~whether a distinction is packaged into an object at the layer.
+The latter---whether a distinction becomes a layer-level object---is governed by packaging maps induced by the record algebra.
+
+\subsection{Coarse access $Q_f$ and completion $U_f$}
+
+Two standard quantum constructions play the SBT roles of coarse access and completion.
+
+\paragraph{Discard/inaccessibility ($Q_f$).}
+If some degrees of freedom are not accessible at the layer, coarse access is modeled by discarding those degrees of freedom.
+For $\rho_{SE}\in \mathsf{D}(\mathcal{H}_S\otimes \mathcal{H}_E)$, coarse access is the partial trace over~$\mathcal{H}_E$:
+\[
+Q_f(\rho_{SE}) := \mathrm{Tr}_E(\rho_{SE}).
+\]
+
+\paragraph{Canonical completion ($U_f$).}
+A record algebra selects which coherences are meaningful at the layer.
+A canonical completion chooses a representative state compatible with that record structure.
+The simplest example is diagonal completion in a record basis: retain the diagonal elements (record probabilities) and discard off-diagonal elements (unpackaged phase relations).
+(Maximum-entropy completion can be used in other settings, but we will not need it here.)
+In general, $U_f$ is a canonical representative choice at the description level; in the quantum instantiation, we often take the combined packaging map~$E_f$ itself to be a CPTP map (e.g., dephasing) that enforces the record algebra.
+
+\subsection{Packaging as dephasing (collapse as closure)}
+
+Fix a record basis $\{|i\rangle\}$ on the record register.
+Define the dephasing (``diagonal projection'') map as
+\[
+\Delta(\rho) := \sum_i \langle i|\rho|i\rangle\, |i\rangle\!\langle i|.
+\]
+Equivalently,
+\[
+\Delta(\rho)=\sum_i \Pi_i \rho \Pi_i,\quad \text{where } \Pi_i = |i\rangle\!\langle i|.
+\]
+This dephasing map is the nonselective L\"uders update for the projective measurement in that basis.\cite{NielsenChuang2010QCQI} Idempotence here corresponds to an ideal repeatable-record regime; generic POVMs and instruments need not yield idempotent nonselective updates.
+In SBT terms, $\Delta$ is a packaging map: $\Delta$ enforces the record algebra by removing distinctions (off-diagonal coherences) that are not stabilized as record-level objects.
+
+The key structural point is that packaging is a closure: applying packaging twice does nothing further.
+
+\begin{theorem}[Dephasing is an idempotent packaging map]\label{thm:dephase}
+Let $\Delta$ be dephasing in a fixed basis.
+Then:
+\begin{enumerate}
+  \item (Idempotence) $\Delta(\Delta(\rho))=\Delta(\rho)$ for all $\rho$.
+  \item (Fixed points) $\Delta(\rho)=\rho$ iff $\rho$ is diagonal in that basis (equivalently, $\rho=\mathrm{diag}(v)$ for some $v$).
+\end{enumerate}
+\end{theorem}
+
+Theorem~\ref{thm:dephase} is mechanized in Lean (see \texttt{lean/Sbtq/Sbtq/QuantumDephase.lean}, specifically \texttt{dephase\_idem} and \texttt{dephase\_fixed\_iff\_exists\_diagonal}).
+In this formal sense, ``collapse'' (in a chosen record basis) is not a new causal law: collapse is an idempotent packaging update whose fixed points are precisely the record-classical states.
+
+It is important to distinguish nonselective updates from selective updates. The map~$\Delta$ (or discarding record information) corresponds to a nonselective update that produces a mixture over outcomes. By contrast, a definite observed outcome corresponds to conditioning on a particular record value---that is, a selective update that refines the state within a chosen record algebra.
+
+\subsection{Route mismatch: contextual incompatibility as noncommuting packaging}
+
+Different measurement contexts correspond to different record algebras and hence to different packaging maps.
+SBT predicts that these packaging routes need not commute.
+This noncommutation is not a mysterious physical influence; it is a structural statement about incompatible closures (see Section~\ref{sec:sbt}).
+
+We quantify mismatch using trace distance:
+\[
+\mathrm{RM}(\Delta_1,\Delta_2;\rho) := \tfrac12\|\Delta_1(\Delta_2(\rho))-\Delta_2(\Delta_1(\rho))\|_1.
+\]
+Mismatch is state-dependent and vanishes on the joint fixed-point set (e.g., for states that are incoherent in the relevant bases, or for the maximally mixed state), so coherence relative to the packaging contexts is a prerequisite for observing nonzero mismatch.
+In our experiments, generic incompatible bases yield nonzero mismatch.
+For a tilted basis packaging composed with computational-basis dephasing, the mismatch at a fixed witness state is
+\[
+\texttt{\CTXMismatchTilt},
+\]
+while the special $Z$/$X$ case is numerically zero at machine precision:
+\[
+\texttt{\CTXMismatchZX}.
+\]
+(These values are generated deterministically with seed \texttt{\RepoSeed}.) The qubit $Z$/$X$ case is a special commuting limit: route mismatch is a diagnostic of incompatibility, not its definition, and some incompatible closures can commute in specific cases.
+
+\subsection{Measured mismatch under dynamics}
+
+Packaging can also fail to commute with causal propagation.
+A canonical diagnostic compares
+\[
+\Delta(U_\tau \rho U_\tau^\dagger)
+\quad\text{versus}\quad
+U_\tau \Delta(\rho) U_\tau^\dagger.
+\]
+For generic Hamiltonians, this comparison produces a nonzero route mismatch; for Hamiltonians diagonal in the dephasing basis, the mismatch vanishes.
+In our parameter sweep, the maximum mismatch for a random Hamiltonian was \texttt{\RMRandomMax}, while for a diagonal Hamiltonian the maximum mismatch was \texttt{\RMDiagonalMax} (seed \texttt{\RepoSeed}).
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.95\linewidth]{route_mismatch_vs_time.png}
+  \caption{Route mismatch between causal evolution and packaging: $\Delta(U_\tau \rho U_\tau^\dagger)$ versus $U_\tau\Delta(\rho)U_\tau^\dagger$.}
+  \label{fig:rm-time}
+\end{figure}
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.95\linewidth]{route_mismatch_heatmap.png}
+  \caption{Route mismatch across packaging strength and time (partial dephasing). The commuting (diagonal) case yields essentially zero mismatch.}
+  \label{fig:rm-heat}
+\end{figure}
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.95\linewidth]{dephase_contexts_mismatch.png}
+  \caption{Incompatible record bases define different closures. For a tilted basis the closures do not commute (nonzero mismatch), and alternating packaging drives states toward the fixed-point intersection.}
+  \label{fig:ctx-mismatch}
+\end{figure}
+
+\paragraph{Summary.}
+Quantum mechanics already contains the ingredients of an SBT package:
+unitary or open dynamics for substrate causation, and idempotent packaging maps for record-level objecthood.
+Once these roles are separated, ``collapse'' is recognized as a closure operation, and contextual incompatibility becomes route mismatch between closures rather than a puzzle requiring superluminal beables (posited real-valued quantities, in Bell's terminology).

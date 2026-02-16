@@ -1,0 +1,32 @@
+\section{Mechanized results in Lean}\label{app:lean}
+
+Table~\ref{tab:lean-inventory} lists the mechanized theorems referenced in this paper. To build and verify, run:
+
+\medskip
+\noindent\texttt{cd lean/Sbtq \&\& lake build}
+
+\begin{table}[t]
+  \centering
+  \scriptsize
+  \setlength{\tabcolsep}{4pt}
+  \begin{tabular}{@{}llll@{}}
+    \toprule
+    ID & Lean file & Symbol & Statement \\
+    \midrule
+    THM-LQ1 & LeibnizQuotient & quotient\_lift\_exists\_unique & Universal property \\
+    THM-LQ2 & LeibnizQuotient & liftLens\_comp\_q & Lens factors through quotient \\
+    THM-DEF1 & Definability & definable\_iff\_constantOnFibers & Definable iff constant on fibers \\
+    THM-DEF2 & Definability & refines\_original\_iff\_definable & Refinement iff definable \\
+    THM-DEF3 & Definability & refined\_strictlyRefines\_of\_notDefinable & Strict extension if not definable \\
+    THM-PKG1 & PackagingFromEquivalence & sat\_idem & Saturation is idempotent \\
+    THM-PKG2 & PackagingFromEquivalence & sat\_eq\_iff\_unionOfClasses & Fixed points are class unions \\
+    THM-RM1 & RouteMismatch & mismatch\_witness & Noncommutation witness \\
+    THM-RM2 & RouteMismatch & not\_commute\_E\_F & Noncommuting idempotents \\
+    THM-QD1 & QuantumDephase & dephase\_idem & Dephasing is idempotent \\
+    THM-QD2 & QuantumDephase & dephase\_fixed\_iff\_exists\_diagonal & Fixed points are diagonal \\
+    THM-DPI1 & DPI\_Finite & tvdist\_pushforward\_le & TV contracts under pushforward \\
+    \bottomrule
+  \end{tabular}
+  \caption{Lean mechanization inventory. Source files are located at \texttt{lean/Sbtq/Sbtq/<name>.lean}.}
+  \label{tab:lean-inventory}
+\end{table}

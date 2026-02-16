@@ -1,0 +1,100 @@
+\section{Double slit and quantum eraser as objecthood budgeting}\label{sec:doubleslit}
+
+The double-slit experiment is often framed as a ``wave versus particle'' dilemma.
+In the SBT packaging language, a more precise description is: the double-slit experiment is a controlled demonstration of \emph{when a distinction becomes an object of the operative layer}.
+The relevant distinction is ``which slit did the particle pass through?''
+If this distinction is not packaged into a stable record, the layer's correct composition rule is coherent superposition (producing interference);
+if the distinction is packaged, the correct rule is a classical mixture (no interference).
+
+\subsection{A minimal model with explicit record overlap}
+
+Let the slit degree of freedom be spanned by $\{|A\rangle,|B\rangle\}$, and let $|x\rangle$ denote a screen position basis.
+After the slits, consider the coherent preparation
+\[
+|\psi\rangle = \tfrac{1}{\sqrt2}\left(|A\rangle + |B\rangle\right).
+\]
+Let $U$ be the propagation operator from the slit plane to the screen, and define the two path amplitudes as
+\[
+\psi_A(x) := \langle x|U|A\rangle,\qquad \psi_B(x) := \langle x|U|B\rangle.
+\]
+Without any which-path record, the detection probability at position~$x$ is
+\[
+P(x) = \left|\tfrac{1}{\sqrt2}(\psi_A(x)+\psi_B(x))\right|^2
+     = \tfrac12\left(|\psi_A(x)|^2+|\psi_B(x)|^2\right)
+       + \mathrm{Re}\!\left(\psi_A(x)^\ast\psi_B(x)\right).
+\]
+The last term is the interference term.
+
+Now model any which-path record (including uncontrolled environmental coupling) by an environment register~$\mathcal{E}$ that becomes correlated with the path:
+\[
+|A\rangle|\mathcal{E}_0\rangle \mapsto |A\rangle|\mathcal{E}_A\rangle,\qquad
+|B\rangle|\mathcal{E}_0\rangle \mapsto |B\rangle|\mathcal{E}_B\rangle.
+\]
+The joint state becomes
+\[
+|\Psi\rangle=\tfrac{1}{\sqrt2}\big(|A\rangle|\mathcal{E}_A\rangle + |B\rangle|\mathcal{E}_B\rangle\big).
+\]
+If the environment record is not retained or conditioned upon at the screen, the observed statistics are
+\[
+P(x)=\tfrac12\left(|\psi_A(x)|^2+|\psi_B(x)|^2\right)
++\mathrm{Re}\!\left(\psi_A(x)^\ast\psi_B(x)\,\langle \mathcal{E}_B|\mathcal{E}_A\rangle\right).
+\]
+Thus the interference visibility is controlled by the record overlap~$\gamma$:\cite{Englert1996Visibility}
+\[
+\gamma := \langle \mathcal{E}_B|\mathcal{E}_A\rangle.
+\]
+When $\gamma=1$, the record carries no distinguishability and interference is maximal; when $\gamma=0$, the record is perfectly distinguishing and interference vanishes.
+
+\subsection{SBT interpretation: when a distinction becomes an object}
+
+In SBT terms, ``which slit?'' is not automatically an object of the operative layer.
+The distinction ``which slit?'' becomes an object precisely when the substrate supports a stable, distinguishable carrier of that distinction.
+In the equation above, this occurs exactly in the limit $|\gamma|\to 0$:
+the environment states become orthogonal, the distinction becomes recordable, and the interference term disappears.
+
+Conversely, when $|\gamma|$ is near~$1$, the layer cannot stably split the description into ``path~$A$ occurred'' versus ``path~$B$ occurred'' without inventing surplus structure.
+The correct layer description is then to compose the two alternatives coherently, producing interference.
+
+\subsection{Reproducible visibility curves}
+
+Figure~\ref{fig:ds-patterns} shows the screen patterns for several values of~$|\gamma|$ in a far-field minimal model.
+Figure~\ref{fig:ds-visibility} shows that the extracted fringe visibility tracks~$|\gamma|$ as expected.
+Both figures are generated deterministically by repository experiment \texttt{EXP-DS1} (see Appendix~\ref{app:repro}).
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.95\linewidth]{double_slit_patterns.png}
+  \caption{Double slit patterns as the record overlap $|\gamma|$ decreases: interference fades exactly as a stable which-path record forms.}
+  \label{fig:ds-patterns}
+\end{figure}
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.75\linewidth]{double_slit_visibility.png}
+  \caption{Extracted visibility versus record overlap magnitude $|\gamma|$ in the minimal model.}
+  \label{fig:ds-visibility}
+\end{figure}
+
+\subsection{Quantum eraser as repackaging (not retrocausality)}
+
+The same logic explains ``quantum eraser'' phenomena without invoking any backwards-in-time influence.\cite{ScullyDruhl1982,Kim2000DelayedChoice}
+Marking which-path information correlates the path with an environment degree of freedom, driving~$|\gamma|$ toward~$0$ and eliminating interference in the \emph{unconditional} statistics.
+However, if one subsequently conditions on an environment measurement performed in a basis that does \emph{not} preserve the which-path split (e.g., the $\{|\pm\rangle\}$ basis for an environment qubit),
+then within each conditioned subensemble the effective overlap is restored and interference reappears, with complementary phase shifts between the two subensembles.
+
+This is packaging language: different conditioning choices correspond to different ways of carving the joint state into record-level objects.
+Nothing needs to ``change the past''; what changes is which distinctions are stabilized and reported at the layer.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.95\linewidth]{quantum_eraser_unconditional.png}
+  \caption{Quantum eraser: unconditional statistics after which-path marking (interference suppressed).}
+  \label{fig:qe-uncond}
+\end{figure}
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.95\linewidth]{quantum_eraser_conditional.png}
+  \caption{Quantum eraser: conditional subensembles after measuring the environment in the $\{|\pm\rangle\}$ basis (interference restored with opposite phase).}
+  \label{fig:qe-cond}
+\end{figure}

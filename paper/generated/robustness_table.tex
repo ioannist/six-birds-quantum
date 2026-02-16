@@ -1,0 +1,29 @@
+\begin{table}[t]
+  \centering
+  \begin{tabular}{l l r r r}
+    \toprule
+    Experiment & Metric & Min & Median & Max \\
+    \midrule
+    double\_slit & visibility[0] & 1 & 1 & 1 \\
+    double\_slit & visibility\_at\_zero\_gamma & 0 & 0 & 0 \\
+    quantum\_eraser & visibility\_unconditional & 6.66134e-16 & 6.66134e-16 & 6.66134e-16 \\
+    quantum\_eraser & visibility\_plus & 1 & 1 & 1 \\
+    quantum\_eraser & visibility\_minus & 0.999999 & 0.999999 & 0.999999 \\
+    route\_mismatch & max\_mismatch\_random\_H & 0.239517 & 0.337317 & 0.504787 \\
+    route\_mismatch & max\_mismatch\_diagonal\_H & 0 & 0 & 0 \\
+    cat\_packaging & purity\_SAE\_after\_record & 1 & 1 & 1 \\
+    cat\_packaging & purity\_SA\_after\_record & 0.5 & 0.5 & 0.5 \\
+    cat\_packaging & dist\_pack\_vs\_mix & 1.11022e-16 & 1.11022e-16 & 1.11022e-16 \\
+    cat\_packaging & idempotence\_error & 0 & 0 & 0 \\
+    markov\_packaging & tau\_first\_stable & 1 & 1 & 1 \\
+    dephase\_contexts & mismatch\_Z\_tilt & 0.216506 & 0.216506 & 0.216506 \\
+    dephase\_contexts & mismatch\_ZX & 3.11164e-19 & 3.11164e-19 & 3.11164e-19 \\
+    dephase\_contexts & distance\_to\_maxmix\_final & 3.05176e-05 & 3.05176e-05 & 3.05176e-05 \\
+    no\_signalling\_epr & no\_signalling\_dist\_Z & 0 & 0 & 0 \\
+    no\_signalling\_epr & no\_signalling\_dist\_X & 2.22045e-16 & 2.22045e-16 & 2.22045e-16 \\
+    no\_signalling\_epr & cond\_outcome\_dist\_Z & 1 & 1 & 1 \\
+    \bottomrule
+  \end{tabular}
+  \caption{Robustness sweep summary (min/median/max over seeds).}
+  \label{tab:robustness-sweep}
+\end{table}

@@ -1,0 +1,97 @@
+\section{No-go pressures as assumptions about globally compatible packaging}\label{sec:no-go}
+
+Many foundational ``no-go'' pressures can be read as constraints on what one is allowed to treat as simultaneously well-defined at a single layer.
+In the SBT language, the key question becomes:
+\emph{Are we implicitly assuming a single, globally compatible packaging map (or record algebra) that applies to all contexts at once?}
+When that assumption is imported, one is often forced into surplus structure (hidden distinctions or influences) to preserve a unified ontological picture.
+SBT suggests a different diagnosis: the difficulty lies in insisting on globally compatible packaging, rather than in the causal substrate.
+Representative pressures include Bell-type constraints, contextuality, and epistemic-state no-go results.\cite{Bell1964,KochenSpecker1967,Mermin1990,Pusey2012PBR}
+
+\subsection{The hidden assumption: one global packaging for all contexts}
+
+Operationally, a ``context'' specifies which record variables are stabilized and reported.
+Mathematically, a context selects a lens family and hence a packaging map.
+A common move in foundational arguments is to demand that all contexts be simultaneously representable within a single joint description that is independent of which packaging is chosen.
+In SBT terms, this demand amounts to assuming that there exists a single record language (or closure) that commutes appropriately with every context and with composition across subsystems.
+
+The experiments and mechanized lemmas collected in this paper support the opposite lesson:
+contexts can correspond to \emph{incompatible} closures, and insisting on a single globally compatible packaging is exactly the move that creates contradictions or forces surplus beables.
+
+To situate this observation in familiar terms: Bell-type arguments assume a single joint outcome model across settings together with a factorization/local-causality constraint, which in SBT language amounts to a single global record language plus naive composition constraints. Kochen--Specker and Peres--Mermin contextuality arguments assume a context-independent value assignment---that is, a single packaging/value map across contexts. The PBR theorem relies on preparation independence, which is a composition premise about independently prepared systems. We are not disputing these theorems; we are isolating where a framework-level global-packaging premise enters their standard formulations.
+
+\subsection{Contexts as strict extensions (definability)}
+
+SBT makes context-dependence precise using the concept of definability.
+Given a lens $f:Z\to X$, a predicate $h:Z\to\{\mathsf{true},\mathsf{false}\}$ is \emph{definable} from~$f$ if and only if $h$ is constant on the fibers of~$f$.
+Equivalently, $h$ factors through~$f$.
+If $h$ is not definable from~$f$, then refining the lens to $(f,h)$ is a \emph{strict extension} of the layer: the refinement enables distinctions that were not expressible before.
+
+This formalization captures a key point for quantum contexts:
+a change of measurement basis is not merely ``revealing a pre-existing value'' in the same record language.
+Rather, it is an extension or change of the record algebra itself.
+In the repository, this strict-extension criterion is mechanized in Lean (see \texttt{Definability.lean}, specifically \texttt{definable\_iff\_constantOnFibers}; see Appendix~\ref{app:lean}).
+
+\subsection{Contextuality as noncommuting closures}
+
+If two contexts induce packaging maps $\Delta_1$ and $\Delta_2$, then incompatibility is witnessed by noncommutation:
+$\Delta_1\circ\Delta_2\neq \Delta_2\circ\Delta_1$.
+This noncommutation is a structural statement: there is no requirement that different closures commute, and indeed one should not expect them to commute if they stabilize different record algebras.
+
+Figure~\ref{fig:nogo-ctx} shows the measured mismatch between two dephasing (packaging) maps associated with incompatible bases (repository experiment \texttt{EXP-CTX1}; see Appendix~\ref{app:repro}).
+The same figure also illustrates a complementary phenomenon: alternating incompatible packaging operations drives states toward the intersection of their fixed points (for a qubit, essentially the maximally mixed state).
+This convergence is exactly what one should expect from closures: repeated application filters away distinctions that are not jointly stable as objects across the two record languages.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.95\linewidth]{dephase_contexts_mismatch.png}
+  \caption{Incompatible record bases define different packaging closures. For a tilted basis, dephasing in one basis does not commute with dephasing in another, yielding a nonzero route mismatch; alternating the closures drives states toward the fixed-point intersection.}
+  \label{fig:nogo-ctx}
+\end{figure}
+
+\subsection{No-signalling versus conditioning: inference update is not influence}
+
+Spekkens' Leibnizian concern is especially sharp in discussions of nonlocality:
+one should be cautious about positing causal influences that cannot be isolated as operationally distinguishable mechanisms at the layer (e.g., because they cannot be used to signal).
+
+A clean separation is visible already in the simplest entangled example.
+Consider a Bell pair~$\rho_{AB}$ shared between Alice and Bob.\cite{Einstein1935EPR}
+If Alice measures in one basis or another and Bob does \emph{not} condition on her outcome, Bob's reduced state is unchanged:
+this invariance is the no-signalling constraint.
+However, if Bob \emph{does} condition on Alice's announced outcome, his conditional state can change dramatically.
+This change is an inferential update relative to the refined record (conditioning), not evidence of a new causal influence propagating superluminally.
+
+Figure~\ref{fig:nogo-ns} displays this distinction (repository experiment \texttt{EXP-NS1}; see Appendix~\ref{app:repro}):
+unconditional reduced states match, while conditional reduced states differ.
+This is the concrete sense in which SBT separates causation from inference in the quantum setting.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.95\linewidth]{no_signalling_epr.png}
+  \caption{EPR pair: no-signalling (Bob's unconditional reduced state is unchanged by Alice's measurement choice) versus conditioning (Bob's conditional states differ when outcomes are known).}
+  \label{fig:nogo-ns}
+\end{figure}
+
+\subsection{Audit principle: coarse access cannot create distinguishability}
+
+The SBT package includes audits: monotones that must not increase under admissible coarse access.
+In the classical finite setting, this requirement is a deterministic data-processing statement.\cite{CoverThomas2006}
+
+\begin{theorem}[Deterministic audit contraction (finite TV DPI)]\label{thm:tv-dpi}
+Let $Z$ and $X$ be finite sets, let $f:Z\to X$ be a deterministic coarse-graining, and let $\mu,\nu$ be two functions on $Z$ (in particular, distributions on $Z$).
+Let $f_\ast\mu$ denote the pushforward onto $X$.
+Then total variation distance contracts under pushforward:
+\[
+\mathrm{TV}(f_\ast\mu, f_\ast\nu)\ \le\ \mathrm{TV}(\mu,\nu).
+\]
+\end{theorem}
+
+Theorem~\ref{thm:tv-dpi} is mechanized in Lean (see \texttt{DPI\_Finite.lean}, specifically \texttt{tvdist\_pushforward\_le}).
+In quantum theory, analogous data-processing inequalities hold for standard distinguishability measures under CPTP maps (including discarding subsystems).\cite{Lindblad1975EntropyIneq}
+We will not re-prove the full quantum DPI here; our point is methodological:
+audits formalize ``no false positives''---coarse access and packaging should not manufacture apparent distinctions that were not already present at the substrate.
+
+\paragraph{Limitation: not a Bell solution.}
+We do not claim to ``solve Bell'' or to provide a new hidden-variable model.
+Our aim is narrower: to localize a recurring category error.
+Many no-go arguments are naturally read as ruling out a \emph{single globally compatible packaging} that simultaneously supports all contexts with naive composition assumptions.
+SBT rejects that global-packaging demand on principled grounds (layer-relative records and incompatible closures), while remaining fully compatible with the operational constraints (no-signalling, reproducible statistics) that experiments actually certify.

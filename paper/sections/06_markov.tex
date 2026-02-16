@@ -1,0 +1,72 @@
+\section{A classical analogue: staged objecthood in metastable Markov dynamics}\label{sec:markov}
+
+SBT's central mechanism---that objecthood is layer-relative and stabilized by packaging---is not uniquely quantum.
+A purely classical substrate with coarse access can exhibit the same structure: at certain timescales, coarse variables behave like stable objects; at other timescales, they do not.
+
+\subsection{Metastable substrate and a basin lens}
+
+Let $Z$ be a finite set of microstates, and let $P$ be a Markov kernel on~$Z$.\cite{Norris1997}
+Write $T_\tau$ for $\tau$ steps of evolution acting on a microdistribution~$\mu$:
+\[
+T_\tau(\mu) = \mu P^\tau.
+\]
+Assume that $P$ has (at least) two metastable basins with weak coupling: rapid mixing within each basin and rare transitions between basins.
+
+Define a basin lens (coarse record variable)
+\[
+f : Z \to X,
+\]
+where $X$ is a small set of macro labels (e.g., ``left basin'' versus ``right basin'').
+
+\subsection{Prototypes and the packaging operator $E_{\tau,f}$}
+
+Coarse access pushes a microdistribution forward to a distribution over basins:
+\[
+Q_f(\mu)(x) := \sum_{z\in Z: f(z)=x} \mu(z).
+\]
+Completion returns a canonical representative on~$Z$ by selecting a prototype distribution~$u_x$ for each macro label $x\in X$.
+In the metastable example, prototypes are chosen as uniform distributions on each basin.
+These prototypes (and hence~$U_f$) are a chosen completion/section and are part of the package, not canonical.
+
+Define completion by
+\[
+U_f(p) := \sum_{x\in X} p(x)\,u_x,
+\]
+and define the timescale-dependent packaging operator by
+\[
+E_{\tau,f} := U_f \circ Q_f \circ T_\tau.
+\]
+That is, the operator evolves the substrate, reads only the basin masses, and then discards within-basin microdetails by re-imposing the prototypes.
+
+\subsection{Idempotence defect and prototype stability}
+
+Packaging behaves like a closure when applying it twice adds no new record-level content.
+A quantitative way to test this property is via the idempotence defect:
+\[
+\delta(\tau) := \sup_{\mu}\ \mathrm{TV}\!\left(E_{\tau,f}(E_{\tau,f}(\mu)),\ E_{\tau,f}(\mu)\right),
+\]
+where $\mathrm{TV}$ denotes total variation distance on~$Z$.
+When $\delta(\tau)$ is small, the packaged description is approximately closed under reapplication: the layer has stabilized a coherent object language at that timescale.
+
+A complementary diagnostic is prototype stability: whether $E_{\tau,f}(u_x)\approx u_x$ for each macro label~$x$.
+In our implementation, we track a worst-case stability score over prototypes as a function of~$\tau$.
+
+\subsection{Two regimes: emergent objects and collapse-to-constant}
+
+Figure~\ref{fig:markov-idem} plots the measured defect~$\delta(\tau)$ for a fixed metastable chain (repository experiment \texttt{EXP-MK1}; see Appendix~\ref{app:repro}).
+The curve exhibits distinct regimes, reflecting the presence of multiple timescales:
+\begin{itemize}
+  \item At timescales where within-basin mixing dominates and cross-basin leakage is negligible, the basin prototypes behave as stable objects and packaging is close to idempotent.
+  \item At intermediate timescales where leakage becomes significant, repeated packaging can drift: the basin split is not fully stable as an object language, and the defect increases.
+  \item At sufficiently long timescales, the chain approaches global equilibrium, and packaging approaches a collapse-to-constant regime: the effective object language becomes trivial (essentially one stable macro-description), and the defect decreases again.
+\end{itemize}
+In the particular instance plotted, the first timescale meeting the chosen stability threshold occurs at $\tau=\MKFirstStableTau$ (see the experiment output).
+
+We also ran robustness sweeps over multiple seeds for the full experimental pipeline; the Markov staging behavior is stable under these variations. A compact min/median/max summary is reported in Appendix~\ref{app:robustness}.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.95\linewidth]{markov_idempotence_vs_tau.png}
+  \caption{Idempotence defect $\delta(\tau)$ for a metastable Markov substrate under basin packaging. Distinct regimes reflect competing mixing timescales: emergent basin-level objects at some $\tau$, and a long-time collapse-to-constant regime.}
+  \label{fig:markov-idem}
+\end{figure}

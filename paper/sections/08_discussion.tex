@@ -1,0 +1,67 @@
+\section{Discussion: what changes, what does not}\label{sec:discussion}
+
+\subsection{Recap in one paragraph}
+
+The central thesis of this paper is that much of quantum theory's conceptual friction is produced by a category mistake: treating an inferential/completion object (the quantum state at a given layer) as a primitive ontic object.
+SBT provides a language in which causal substrate evolution and record-level packaging are distinct mathematical roles.
+In that language, ``collapse'' becomes an idempotent closure induced by a record algebra; contextual incompatibility becomes noncommuting closures (route mismatch); and the cat paradox is localized as a confusion about layer-relative objecthood rather than a demand for a discontinuous physical process. A cross-domain instantiation of the same framework appears in~\cite{Tsiokos2026Stone}.
+
+\subsection{What dissolves (and what merely relocates)}
+
+\paragraph{Collapse.}
+Once packaging is made explicit, collapse is recognized as a closure enforcing a chosen record algebra (often dephasing in a pointer basis), rather than as a new causal process.
+The decisive structural features are idempotence and fixed points: applying packaging twice does not change the record-level description, and fixed points are exactly the record-classical states (see Section~\ref{sec:qm-package}).
+
+\paragraph{The cat.}
+The system--apparatus--environment model shows how global coherence can persist at the substrate while the packaged record-level description is a classical mixture over pointer outcomes (see Section~\ref{sec:cat}).
+The paradox arises when macroscopic alternatives are treated as object-level facts before the corresponding record distinctions are packaged.
+
+\paragraph{Nonlocality and signalling.}
+SBT does not deny nonclassical correlations; rather, it reframes what those correlations do and do not license at a given layer.
+In particular, the EPR demonstration explicitly separates no-signalling (an operational constraint on what can be detected without conditioning) from conditioning (an inferential refinement of the record language); see Section~\ref{sec:no-go}.
+This separation removes the pressure to interpret conditional updates as evidence for superluminal influences at the layer.
+
+\subsection{Limitations and non-claims}
+
+To avoid overinterpretation, we emphasize what this paper does not claim.
+
+\begin{itemize}
+  \item \textbf{No new microdynamics.} We do not propose a replacement for unitary or open quantum evolution. The core move is a reorganization of roles: causation versus packaging.
+  \item \textbf{No Born-rule derivation.} This paper is not a derivation of the Born rule from deeper principles. We treat the standard operational predictions as given and clarify how those predictions can be read without surplus layer ontology.
+  \item \textbf{Not a Bell solution.} We do not provide a hidden-variable completion or a proof that all Bell-type tensions disappear. Our claim concerns where a common category mistake enters: by demanding a single globally compatible packaging (or record language) across incompatible contexts.
+  \item \textbf{No claim of uniqueness.} Dephasing is a canonical packaging map for a fixed record basis, but SBT allows other completion/packaging choices depending on the layer's certified record interface.
+  \item \textbf{No selection rule derived.} We do not derive pointer-basis selection or single-outcome selection; we treat record algebras as given interfaces and treat conditioning as an inferential refinement.
+\end{itemize}
+
+\subsection{Diagnostics and testable expectations}
+
+Although SBT is primarily a framework for disentangling causal and inferential structure, SBT suggests concrete diagnostics.
+
+\paragraph{Route mismatch as a context diagnostic.}
+Whenever two contexts correspond to incompatible record algebras, the induced packaging maps need not commute.
+Quantitatively, one should expect a nonzero route mismatch between closures when:
+(i)~the basis or record algebra changes and
+(ii)~the state contains coherence relative to at least one of the bases.
+Conversely, mismatch should vanish (or be negligible) when the dynamics and record algebra share a common diagonalizing structure (as in the diagonal Hamiltonian control case of Section~\ref{sec:qm-package}).
+
+\paragraph{Stability criteria for objecthood.}
+Object-level distinctions correspond to stable closure fixed points (or approximate fixed points) at a timescale.
+The metastable Markov example illustrates an explicitly classical analogue: stable objects appear at certain~$\tau$ where idempotence defect is small, and disappear or collapse in regimes where the effective record language becomes trivial (see Section~\ref{sec:markov}).
+In laboratory settings, this observation suggests focusing on experimentally controllable knobs that tune the stability of records (decoherence rates, coupling strengths, coarse-graining windows), and checking whether predicted object-level descriptions remain stable under re-packaging.
+
+\paragraph{Audit monotones.}
+The audit principle states that admissible coarse access cannot manufacture distinguishability.
+In the finite deterministic case, we mechanize a total-variation contraction theorem (see Section~\ref{sec:no-go}).
+In quantum settings, analogous contraction properties under CPTP maps provide a principled way to guard against interpretational ``false positives'' produced by mixing inference updates into causal narratives.
+
+In quantum information terms, many of our packaging maps are idempotent CPTP channels (projective pinching or conditional expectation onto a commutative record algebra), and route mismatch is the noncommutation of such channels with each other or with dynamics. The contribution of this paper is the role separation (causation versus packaging) and its use as an interpretational bookkeeping discipline combined with a diagnostic workflow.
+
+\subsection{Future work}
+
+Several extensions are natural and would sharpen the framework.
+
+\begin{itemize}
+  \item \textbf{Spekkens toy theory as an SBT instance.} Implementing Spekkens' epistemic restriction as a packaging/completion pipeline would provide a direct bridge from the diagnosis to a fully worked non-quantum analogue.
+  \item \textbf{Peres--Mermin and contextuality stress tests.} A compact SBT reading of a Peres--Mermin square (as incompatible closures over contexts) would make the ``no global packaging'' point even more concrete.\cite{Mermin1990}
+  \item \textbf{Bell-type assumption audits.} A careful separation of operational constraints (no-signalling) from packaging assumptions (global joint record language, factorization) could yield a taxonomy of where specific no-go statements bite in SBT terms, without presenting it as a single grand ``resolution.''
+\end{itemize}

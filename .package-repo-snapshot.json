@@ -1,0 +1,49 @@
+{
+  "allowed_roots": {
+    "docs": {
+      "extensions": [".md", ".tex", ".bib", ".txt"]
+    },
+    "src": {
+      "extensions": [".py", ".toml", ".md", ".txt"]
+    },
+    "tests": {
+      "extensions": [".py", ".txt", ".md"]
+    },
+    "lean": {
+      "extensions": [".lean", ".toml"],
+      "filenames": ["lean-toolchain", "lakefile.lean", "lakefile.toml"]
+    },
+    "scripts": {
+      "extensions": [".sh", ".py", ".txt"]
+    },
+    "paper": {
+      "extensions": [".tex", ".bib", ".md", ".txt", ".py", ".png"]
+    },
+    "artifacts": {
+      "extensions": [".json", ".png"]
+    }
+  },
+  "allowed_root_files": [
+    "README_DEV.md",
+    "pyproject.toml",
+    "Makefile",
+    ".gitignore",
+    ".package-repo-snapshot.json",
+    "plan.md"
+  ],
+  "exclude_dirs": [
+    ".git",
+    ".lake",
+    ".venv",
+    "venv",
+    "__pycache__",
+    ".mypy_cache",
+    ".pytest_cache",
+    ".ruff_cache",
+    ".ipynb_checkpoints",
+    "build",
+    "dist",
+    "logs",
+    "tmp"
+  ]
+}

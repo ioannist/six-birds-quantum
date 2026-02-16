@@ -1,0 +1,9 @@
+{
+  "dist_pack_vs_env": 0.0,
+  "dist_pack_vs_mix": 1.1102230246251565e-16,
+  "idempotence_error": 0.0,
+  "model": "cat_SAE_cnot_measure_and_record",
+  "purity_SAE_after_record": 0.9999999999999996,
+  "purity_SA_after_record": 0.4999999999999998,
+  "purity_SA_before_record": 0.9999999999999996
+}
